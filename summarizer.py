@@ -184,11 +184,8 @@ def runner():
             print(channel["name"])
         messages = slack_client.load_messages(channel["id"], start_time, end_time)
         
-        # Filter messages by the specified author
         if messages is None:
             continue
-        
-        messages = [msg for msg in messages if msg.get('user') == AUTHOR_NAME]
 
         # remove emojis in messages
         messages = list(map(remove_emoji, messages))
