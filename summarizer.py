@@ -155,6 +155,7 @@ OPEN_AI_TOKEN = str(os.environ.get('OPEN_AI_TOKEN')).strip()
 SLACK_BOT_TOKEN = str(os.environ.get('SLACK_BOT_TOKEN')).strip()
 CHANNEL_ID = str(os.environ.get('SLACK_POST_CHANNEL_ID')).strip()
 LANGUAGE = str(os.environ.get('LANGUAGE') or "Japanese").strip()
+AUTHOR_NAME = str(os.environ.get('AUTHOR_NAME')).strip()
 TIMEZONE_STR = str(os.environ.get('TIMEZONE') or 'Asia/Tokyo').strip()
 TEMPERATURE = float(os.environ.get('TEMPERATURE') or 0.3)
 CHAT_MODEL = str(os.environ.get('CHAT_MODEL') or "gpt-3.5-turbo").strip()
@@ -183,6 +184,9 @@ def runner():
             print(channel["name"])
         messages = slack_client.load_messages(channel["id"], start_time,
                                               end_time)
+        # Filter messages by the specified author
+        messages = [msg for msg in messages if msg.get('user') == AUTHOR_NAME]
+
         if messages is None:
             continue
 
