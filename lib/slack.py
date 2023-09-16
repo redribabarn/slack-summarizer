@@ -96,6 +96,10 @@ class SlackClient:
                            exception=SlackApiError)
             messages_info.extend(result["messages"])
 
+        # Filter messages based on AUTHOR_ID
+            filtered_messages = [message for message in response['messages'] if message['user'] == AUTHOR_ID]
+            messages.extend(filtered_messages)
+                          
         # Filter for human messages only
         messages = list(filter(lambda m: "subtype" not in m, messages_info))
 
