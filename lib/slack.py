@@ -95,22 +95,22 @@ class SlackClient:
                 cursor=result["response_metadata"]["next_cursor"]),
                            exception=SlackApiError)
             messages_info.extend(result["messages"])
-
-        # Filter messages based on AUTHOR_ID
-            filtered_messages = [message for message in response['messages'] if message['user'] == AUTHOR_ID]
-            messages.extend(filtered_messages)
-                          
+            
         # Filter for human messages only
         messages = list(filter(lambda m: "subtype" not in m, messages_info))
 
+        # Filter user_id = U03F67RAW
+        messages = [msg for msg in messages if msg["user"] == "U03F67RAW"]
+
+                          
         if len(messages) < 1:
             return None
 
         messages_text = []
         for message in messages[::-1]:
-            # Ignore bot messages and empty messages
-            if "bot_id" in message or len(message["text"].strip()) == 0:
-                continue
+            # Ignore bot messages and empty messages and U03F67RAW以外の user_id
+            if "bot_id" in message or len(message["text"].strip()) == 0 or message["user"] != "U03F67RAW":
+            continue
 
             # Get speaker name
             speaker_name = self.get_user_name(message["user"]) or "somebody"
