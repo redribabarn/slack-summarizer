@@ -107,7 +107,7 @@ class SlackClient:
         for message in messages[::-1]:
             # Ignore bot messages and empty messages and U03F67RAW以外の user_id
             if "bot_id" in message or len(message["text"].strip()) == 0 or message["user"].strip() != "U03F67RAW":
-            continue
+                continue
 
             # Get speaker name
             speaker_name = self.get_user_name(message["user"]) or "somebody"
