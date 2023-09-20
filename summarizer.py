@@ -40,7 +40,6 @@ def summarize(text: str, language: str = "Japanese"):
             "\n".join([
                 'The chat log format consists of one line per message in the format "Speaker: Message".',
                 "The `\\n` within the message represents a line break.",
-                "Please focus on messages where the Speaker is 'akagawa.akira' when summarizing."
                 f'The user understands {language} only.'
                 f'So, The assistant need to speak in {language}.',
             ])
@@ -50,7 +49,6 @@ def summarize(text: str, language: str = "Japanese"):
             "content":
             "\n".join([
                 f"Please summarize only the messages in the following chat log to flat bullet list in {{language}}.",
-                "Please focus on messages where the Speaker is 'akagawa.akira' when summarizing.",
                 "It isn't line by line summary.",
                 "Do not include greeting/salutation/polite expressions in summary.",
                 "With make it easier to read."
