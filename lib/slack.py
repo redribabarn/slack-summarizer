@@ -99,9 +99,6 @@ class SlackClient:
         # Filter for human messages only
         messages = list(filter(lambda m: "subtype" not in m, messages_info))
 
-        # Filter user_id = U03F67RAW
-        messages = [msg for msg in messages if msg["user"] == "U03F67RAW"]
-
                           
         if len(messages) < 1:
             return None
