@@ -48,7 +48,7 @@ def summarize(text: str, language: str = "Japanese"):
             "user",
             "content":
             "\n".join([
-                f"Please meaning summarize the following chat log to flat bullet list in {language}.",
+                f"Please summarize only the messages from {{AUTHOR_NAME}} in the following chat log to flat bullet list in {{language}}.",
                 "It isn't line by line summary.",
                 "Do not include greeting/salutation/polite expressions in summary.",
                 "With make it easier to read."
@@ -63,7 +63,7 @@ def summarize(text: str, language: str = "Japanese"):
 
 def get_time_range():
     """
-    Get a time range starting from 3 hours ago and ending at the current time.
+    Get a time range starting from 24 hours ago and ending at the current time.
 
     Returns:
         tuple: A tuple containing the start and end times of the time range, as datetime objects.
@@ -73,7 +73,7 @@ def get_time_range():
         >>> print(start_time, end_time)
         2022-05-17 09:00:00+09:00 2022-05-18 10:00:00+09:00
     """
-    hours_back = 3
+    hours_back = 24
     timezone = pytz.timezone(TIMEZONE_STR)
     now = datetime.now(timezone)
     yesterday = now - timedelta(hours=hours_back)
